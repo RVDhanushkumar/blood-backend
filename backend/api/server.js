@@ -2,8 +2,8 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const vercelExpress = require('vercel-express');
-const dbConnection = require('./database/db');
-const userRoutes = require('./routes/user-routes');
+const dbConnection = require('../database/db');
+const userRoutes = require('../routes/user-routes');
 
 const app = express();
 
