@@ -2,11 +2,14 @@
   "name": "frontend",
   "version": "1.0.0",
   "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx parcel index.html",
-    "build": "npx parcel build index.html --dist-dir dist"
-  },
+  
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "npx parcel index.html",
+      "build": "npx parcel build index.html --dist-dir dist",
+      "postinstall": "chmod +x ./node_modules/.bin/parcel"
+    }
+  ,
   "keywords": [],
   "author": "",
   "license": "ISC",
