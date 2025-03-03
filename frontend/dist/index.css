@@ -1,0 +1,95 @@
+body {
+  color: #333;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.App {
+  flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+}
+
+header {
+  background-color: #f8f8f8;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  display: flex;
+}
+
+header .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+header nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+header nav ul li {
+  margin-left: 20px;
+}
+
+header nav ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+.hero {
+  text-align: center;
+  color: #fff;
+  background-color: #ff4d4d;
+  flex: 1;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  margin-bottom: 20px;
+  font-size: 48px;
+}
+
+.hero p {
+  margin-bottom: 40px;
+  font-size: 18px;
+}
+
+.buttons .btn {
+  color: #fff;
+  background-color: #333;
+  border-radius: 5px;
+  margin: 0 10px;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.buttons .btn.donate {
+  background-color: #ff4d4d;
+  border: 2px solid #fff;
+}
+
+.buttons .btn.sign-in {
+  color: #333;
+  background-color: #fff;
+}
+
+footer {
+  text-align: center;
+  color: #fff;
+  background-color: #333;
+  padding: 20px;
+}
+
+footer .social-icons {
+  margin-top: 10px;
+}
+
+footer .social-icons a {
+  color: #fff;
+  margin: 0 10px;
+  text-decoration: none;
+}
+/*# sourceMappingURL=index.css.map */

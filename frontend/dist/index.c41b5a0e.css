@@ -1,0 +1,150 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #fef0ef;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+}
+
+.navbar {
+  background-color: #222;
+  border-radius: 8px;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  height: 80px;
+  margin-left: 160px;
+  padding: 20px 30px;
+  display: flex;
+}
+
+.logo {
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.nav-links {
+  gap: 20px;
+  display: flex;
+}
+
+.nav-links a {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.nav-links .sign-in {
+  color: #f66;
+  font-weight: bold;
+}
+
+.social-icons {
+  color: #fff;
+  gap: 12px;
+  font-size: 20px;
+  display: flex;
+}
+
+.main-content {
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  height: 100%;
+  display: flex;
+}
+
+.hero {
+  text-align: center;
+  flex: 1;
+  max-width: 600px;
+}
+
+.title {
+  color: #ff4d4d;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.subtitle {
+  color: #222;
+  font-size: 26px;
+  font-style: italic;
+}
+
+.description {
+  color: #444;
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+.buttons {
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+  display: flex;
+}
+
+.donate-btn {
+  color: #fff;
+  cursor: pointer;
+  background-color: #ff4d4d;
+  border: none;
+  border-radius: 6px;
+  padding: 14px 28px;
+  font-size: 18px;
+}
+
+.sign-in-btn {
+  color: #ff4d4d;
+  cursor: pointer;
+  background-color: #0000;
+  border: 2px solid #ff4d4d;
+  border-radius: 6px;
+  padding: 14px 28px;
+  font-size: 18px;
+}
+
+.graphics {
+  justify-content: center;
+  align-items: center;
+  margin: 10px 10px 10px 50px;
+  padding: 10px;
+  display: flex;
+}
+
+.bottom {
+  background: url("bottom.8dac5ddd.png") center / 100% no-repeat;
+  width: 85vw;
+  height: 450px;
+  margin-top: -140px;
+  position: absolute;
+  top: 500px;
+  left: 165px;
+}
+
+.blood-bag {
+  background: url("bottle.cad4975f.png") center / contain no-repeat;
+  width: 600px;
+  height: 500px;
+  left: 1200px;
+}
+
+.hand {
+  background: url("hand.18029628.png") center / contain no-repeat;
+  width: 400px;
+  height: 450px;
+  margin-top: 40px;
+}
+/*# sourceMappingURL=index.c41b5a0e.css.map */
