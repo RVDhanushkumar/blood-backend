@@ -41,7 +41,7 @@ const Register = () => {
     setSuccess(false);
 
     try {
-      const response = await fetch("https://blood-wrh1.onrender.com/user/register", {
+      const response = await fetch("https://blood-ey76.onrender.com/user/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, captcha: captchaValue }), // ✅ Sending reCAPTCHA token
