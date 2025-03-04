@@ -4,7 +4,7 @@ const User=require('../models/user');
 
 
     async function addUser(req,res){
-        const { firstname, lastname, age, gender, bloodgroup, mobile, email, address,captcha } = req.body;  
+        let { firstname, lastname, age, gender, bloodgroup, mobile, email, address,captcha } = req.body;  
         // const { firstname, lastname, age, gender, bloodgroup, mobile, email, address } = req.body; 
         age=parseInt(age)
 
