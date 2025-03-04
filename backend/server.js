@@ -1,20 +1,20 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
-const dbConnection = require('./database/db');  // Your DB connection
-const userRoutes = require('./routes/user-routes');  // Your routes
-
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
 const app = express();
+const dbConnection = require('./database/db');
+const userRoutes = require('./routes/user-routes');
+
 app.use(express.json());
 app.use(cors());
 
-// DB connection
-dbConnection();
+// db connect
+dbConnection()
 
-// Your routes
-app.use('/user', userRoutes);
+app.use("/user", userRoutes);
 
-// Export the Express app to Vercel
-module.exports = (req, res) => {
-  app(req, res);
-};
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+    console.log(`App listening on port ${port}`);
+});
