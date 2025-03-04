@@ -9,7 +9,7 @@ const UserTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:2000/user/getAllEntries");
+        const response = await fetch("https://blood-wrh1.onrender.com/user/getAllEntries");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
