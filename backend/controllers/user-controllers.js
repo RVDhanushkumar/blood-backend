@@ -4,8 +4,9 @@ const User=require('../models/user');
 
 
     async function addUser(req,res){
-        const { firstname, lastname, age, gender, bloodgroup, mobile, email, address,captcha } = req.body; 
+        const { firstname, lastname, age, gender, bloodgroup, mobile, email, address,captcha } = req.body;  
         // const { firstname, lastname, age, gender, bloodgroup, mobile, email, address } = req.body; 
+        age=parseInt(age)
 
         if(!captcha){
             res.status(404).json({
