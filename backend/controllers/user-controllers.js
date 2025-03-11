@@ -1,12 +1,23 @@
 const express=require('express')
 const axios=require("axios")
 const User=require('../models/user');
-
+const userValidation=require("../middleware/userValidation");
+const router = express.Router();
+router.use(userValidation);
 
     async function addUser(req,res){
         let { firstname, lastname, age, gender, bloodgroup, mobile, email, address,captcha } = req.body;  
         // const { firstname, lastname, age, gender, bloodgroup, mobile, email, address } = req.body; 
         age=parseInt(age)
+        const validationResult = user.safeParse({ firstname, lastname, age, gender, bloodgroup, mobile, email, address });
+
+        if (!validationResult.success) {
+            return res.status(400).json({
+                success: false,
+                message: validationResult.error.errors.map(err => err.message).join(", "),
+            });
+        }
+
 
         if(!captcha){
             res.status(404).json({
