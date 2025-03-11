@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 /* General Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Arial", sans-serif;
+}
+body{
+  background-color: #ffedf0;
 }
 
 .container {
@@ -17,16 +23,17 @@
 
 /* Navbar */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background-color: #222;
-  padding: 20px 30px;
-  border-radius: 8px;
-  width: 90%;
-  margin-left: 160px;
-  max-width: 1200px;
-  height: 80px;
+    border-radius: 122px;
+    justify-content: space-between;
+    align-items: center;
+    width: 94%;
+    max-width: 1238px;
+    height: 59px;
+    margin-left: 65px;
+    padding: 12px 30px;
+    display: flex;
+    margin-top: 40px;
 }
 
 .logo {
@@ -37,7 +44,9 @@
 
 .nav-links {
   display: flex;
-  gap: 20px;
+  gap: 50px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: 700;
 }
 
 .nav-links a {
@@ -53,9 +62,10 @@
 
 .social-icons {
   display: flex;
-  gap: 12px;
+  gap: 18px;
   color: white;
   font-size: 20px;
+  margin: 30px;
 }
 
 /* Main Content Layout */
@@ -82,18 +92,27 @@
   font-size: 50px;
   font-weight: bold;
   color: #ff4d4d;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
 }
 
 .subtitle {
   font-size: 26px;
   font-style: italic;
   color: #222;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
 }
 
 .description {
   font-size: 18px;
   margin-top: 15px;
   color: #444;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: italic;
 }
 
 /* Buttons */
@@ -112,6 +131,8 @@
   border-radius: 6px;
   cursor: pointer;
   font-size: 18px;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
 }
 
 .sign-in-btn {
@@ -122,26 +143,28 @@
   border-radius: 6px;
   cursor: pointer;
   font-size: 18px;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
 }
 
 .graphics{
-  display: flex;
-  align-items: center;
   justify-content: center;
-  margin:10px;
-  margin-left: 50px;
-
-  padding:10px;
+    align-items: center;
+    margin: -58px 10px 10px 50px;
+    padding: 10px;
+    display: flex;
 }
 .bottom {
-  width: 85vw;  /* Full viewport width */
-  height: 450px;
+   /* Full viewport width */
   background: url("./assets/bottom.png") no-repeat center;
   background-size: 100% auto;  /* Scale width fully, maintain aspect ratio */
   margin-top:-140px;
   position:absolute;
-  left:165px;
-  top:500px;
+  width: 75.1vw;
+    height: 114px;
+    position: absolute;
+    top: 723px;
+    left: 169px;
 }
 
 
@@ -155,7 +178,45 @@
 }
 .hand {
   width: 400px;
-  height: 450px;
+  height: 515px;
   margin-top: 40px;
   background: url("./assets/hand.png") no-repeat center/contain;
+  top: 85px;
+    left: -2px;
+    position: relative;
+}
+@media (max-width:600px){
+  .container{
+    position: relative;
+    left: 234px;
+  }
+  .blood-bag{
+    position: relative;
+    left: -80px;
+    top: 52px;
+  }
+  .bottom{
+    width: 155vw;
+    height: 107px;
+    margin-top: -140px;
+    position: absolute;
+    top: 669px;
+    left: -236px;
+  }
+  .hero{
+    position: relative;
+    left: 22px;
+  }
+  .nav-links{
+    display: none;
+  }
+  .social-icons{
+    display: none;
+  }
+.navbar{
+  background-color:#ffedf0;
+}
+.logo{
+  color: black;
+}
 }
