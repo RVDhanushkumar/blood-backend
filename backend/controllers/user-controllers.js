@@ -147,4 +147,9 @@ router.get("/allUsers", getAllEntries);
 router.get("/group/:group", getEntryByGroup);
 router.put("/editUser", editUser);
 
-module.exports = router;
+module.exports = {
+    addUser,
+    getAllEntries,
+    getEntryByGroup,
+    editUser
+};

@@ -1,11 +1,12 @@
-const express=require('express');
-const router=express.Router();
-const { getAllEntries,getEntryByGroup,addUser}=require('../controllers/user-controllers')
-const userLimiter=require('../middleware/rateLimiter');
+const express = require("express");
+const { addUser, getAllEntries, getEntryByGroup, editUser } = require("../controllers/user-controllers");
+const userValidation = require("../middleware/userValidation");
 
+const router = express.Router();
 
-router.post('/register',userLimiter,addUser);
-router.get('/getAllEntries',getAllEntries)
-router.get('/getBy/:group',getEntryByGroup);
+router.post("/addUser", userValidation, addUser);
+router.get("/allUsers", getAllEntries);
+router.get("/group/:group", getEntryByGroup);
+router.put("/editUser", editUser);
 
-module.exports=router
+module.exports = router;
