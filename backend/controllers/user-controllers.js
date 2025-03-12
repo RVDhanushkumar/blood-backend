@@ -9,6 +9,7 @@ const router = express.Router();
 async function addUser(req, res) {
     let { fullName, age, gender, bloodgroup, mobile, email, address, captcha } = req.body;
     age = parseInt(age);
+    
 
     // Validate input using Zod schema
     const validationResult = userSchema.safeParse({ fullName, age, gender, bloodgroup, mobile, email, address });
