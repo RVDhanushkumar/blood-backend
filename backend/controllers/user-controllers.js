@@ -1,8 +1,8 @@
 const express = require("express");
 const axios = require("axios");
 const User = require("../models/user");
-const userValidation = require("../middleware/userValidation"); 
-const { userSchema } = require("../middleware/userValidation"); 
+const { userValidation, userSchema } = require("../middleware/userValidation"); 
+const userLimiter = require("../middleware/rateLimiter");
 
 const router = express.Router();
 
@@ -16,7 +16,10 @@ async function addUser(req, res) {
     if (!validationResult.success) {
         return res.status(400).json({
             success: false,
-            message: validationResult.error.errors.map((err) => err.message).join(", "),
+            errors: validationResult.error.errors.map(err => ({
+                path: err.path.join("."),
+                message: err.message,
+            })),
         });
     }
 
@@ -142,7 +145,7 @@ async function editUser(req, res) {
 }
 
 // Apply validation only to the POST route
-router.post("/addUser", userValidation, addUser);
+router.post("/addUser", userLimiter, userValidation, addUser);
 router.get("/allUsers", getAllEntries);
 router.get("/group/:group", getEntryByGroup);
 router.put("/editUser", editUser);

@@ -10,10 +10,10 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization", "x-access-token"], // Allowed headers
 };
 
-app.use(cors(corsOptions)); // Apply CORS configuration
+app.use(cors(corsOptions));
 
 // Your other middleware
-app.use(express.json()); // For parsing application/json
+app.use(express.json()); 
 
 // DB connection
 const dbConnection = require('./database/db');
