@@ -1,17 +1,17 @@
 const express = require("express");
 const axios = require("axios");
 const User = require("../models/user");
-const userValidation = require("../middleware/userValidation"); // Validation middleware
-const { userSchema } = require("../middleware/userValidation"); // Import schema directly
+const userValidation = require("../middleware/userValidation"); 
+const { userSchema } = require("../middleware/userValidation"); 
 
 const router = express.Router();
 
 async function addUser(req, res) {
-    let { firstname, lastname, age, gender, bloodgroup, mobile, email, address, captcha } = req.body;
+    let { fullName, age, gender, bloodgroup, mobile, email, address, captcha } = req.body;
     age = parseInt(age);
 
     // Validate input using Zod schema
-    const validationResult = userSchema.safeParse({ firstname, lastname, age, gender, bloodgroup, mobile, email, address });
+    const validationResult = userSchema.safeParse({ fullName, age, gender, bloodgroup, mobile, email, address });
 
     if (!validationResult.success) {
         return res.status(400).json({
@@ -55,10 +55,10 @@ async function addUser(req, res) {
         }
 
         // Create new user
-        const newUser = await User.create({ firstname, lastname, age, gender, bloodgroup, mobile, email, address });
+        const newUser = await User.create({ fullName, age, gender, bloodgroup, mobile, email, address });
         return res.status(201).json({
             success: true,
-            message: `User ${firstname} registered successfully`,
+            message: `User ${fullName} registered successfully`,
         });
 
     } catch (error) {
@@ -110,12 +110,12 @@ async function getEntryByGroup(req, res) {
 }
 
 async function editUser(req, res) {
-    const { email, firstname, lastname, age, gender, bloodgroup, mobile, address } = req.body;
+    const { email, fullName, age, gender, bloodgroup, mobile, address } = req.body;
 
     try {
         const updatedUser = await User.findOneAndUpdate(
             { email },
-            { firstname, lastname, age, gender, bloodgroup, mobile, address },
+            { fullName, age, gender, bloodgroup, mobile, address },
             { new: true }
         );
 

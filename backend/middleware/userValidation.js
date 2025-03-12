@@ -1,8 +1,7 @@
 const { z } = require('zod');
 
 const userSchema = z.object({
-    firstname: z.string().min(1, "Firstname is required"),
-    lastname: z.string().min(1, "Lastname is required"),
+    fullName: z.string().min(1, "Name  is required"),
     age: z.number().int().positive().max(120, "Age must be a valid number between 18 and 120"),
     gender: z.enum(["Male", "Female", "Other"], { message: "Gender must be either Male, Female, or Other" }),
     bloodgroup: z.enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"], { message: "Blood group must be a valid type" }),

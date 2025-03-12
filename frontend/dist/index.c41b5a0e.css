@@ -1,0 +1,214 @@
+@import "https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap";
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #ffedf0;
+}
+
+.container {
+  background-color: #fef0ef;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+}
+
+.navbar {
+  background-color: #222;
+  border-radius: 122px;
+  justify-content: space-between;
+  align-items: center;
+  width: 94%;
+  max-width: 1238px;
+  height: 59px;
+  margin-top: 40px;
+  margin-left: 65px;
+  padding: 12px 30px;
+  display: flex;
+}
+
+.logo {
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.nav-links {
+  gap: 50px;
+  font-family: Impact, Haettenschweiler, Arial Narrow Bold, sans-serif;
+  font-weight: 700;
+  display: flex;
+}
+
+.nav-links a {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.nav-links .sign-in {
+  color: #f66;
+  font-weight: bold;
+}
+
+.social-icons {
+  color: #fff;
+  gap: 18px;
+  margin: 30px;
+  font-size: 20px;
+  display: flex;
+}
+
+.main-content {
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  height: 100%;
+  display: flex;
+}
+
+.hero {
+  text-align: center;
+  flex: 1;
+  max-width: 600px;
+}
+
+.title {
+  color: #ff4d4d;
+  font-family: Poppins, sans-serif;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.subtitle {
+  color: #222;
+  font-family: Poppins, sans-serif;
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.description {
+  color: #444;
+  margin-top: 15px;
+  font-family: Lato, sans-serif;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.buttons {
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+  display: flex;
+}
+
+.donate-btn {
+  color: #fff;
+  cursor: pointer;
+  font-optical-sizing: auto;
+  background-color: #ff4d4d;
+  border: none;
+  border-radius: 6px;
+  padding: 14px 28px;
+  font-family: Open Sans, sans-serif;
+  font-size: 18px;
+}
+
+.sign-in-btn {
+  color: #ff4d4d;
+  cursor: pointer;
+  font-optical-sizing: auto;
+  background-color: #0000;
+  border: 2px solid #ff4d4d;
+  border-radius: 6px;
+  padding: 14px 28px;
+  font-family: Open Sans, sans-serif;
+  font-size: 18px;
+}
+
+.graphics {
+  justify-content: center;
+  align-items: center;
+  margin: -58px 10px 10px 50px;
+  padding: 10px;
+  display: flex;
+}
+
+.bottom {
+  background: url("bottom.8dac5ddd.png") center / 100% no-repeat;
+  width: 75.1vw;
+  height: 114px;
+  margin-top: -140px;
+  position: absolute;
+  top: 723px;
+  left: 169px;
+}
+
+.blood-bag {
+  background: url("bottle.cad4975f.png") center / contain no-repeat;
+  width: 600px;
+  height: 500px;
+  left: 1200px;
+}
+
+.hand {
+  background: url("hand.18029628.png") center / contain no-repeat;
+  width: 400px;
+  height: 515px;
+  margin-top: 40px;
+  position: relative;
+  top: 85px;
+  left: -2px;
+}
+
+@media (width <= 600px) {
+  .container {
+    position: relative;
+    left: 234px;
+  }
+
+  .blood-bag {
+    position: relative;
+    top: 52px;
+    left: -80px;
+  }
+
+  .bottom {
+    width: 155vw;
+    height: 107px;
+    margin-top: -140px;
+    position: absolute;
+    top: 669px;
+    left: -236px;
+  }
+
+  .hero {
+    position: relative;
+    left: 22px;
+  }
+
+  .nav-links, .social-icons {
+    display: none;
+  }
+
+  .navbar {
+    background-color: #ffedf0;
+  }
+
+  .logo {
+    color: #000;
+  }
+}
+/*# sourceMappingURL=index.c41b5a0e.css.map */
