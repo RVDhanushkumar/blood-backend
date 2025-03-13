@@ -2,6 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const jwt = require('jsonwebtoken');
 const sendEmail = require('../utils/sendEmail');
+const requestEmail = require("../utils/requestEmail");
 const User = require("../models/user");
 const { userValidation, userSchema } = require("../middleware/userValidation"); 
 const userLimiter = require("../middleware/rateLimiter");
@@ -164,16 +165,56 @@ async function verificationtoken(req,res) {
         res.status(500).json({ error: 'Invalid or expired token' });
     }
 }
+
+async function reqblood(req,res){
+    try {
+        const { fullName, phone, email, bloodGroup, location } = req.body;
+
+        // Validate input
+        if (!fullName || !phone || !email || !bloodGroup || !location) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
+        // Find verified donors with the same blood group
+        const donors = await User.find({ bloodGroup, isVerified: true });
+
+        if (donors.length === 0) {
+            return res.status(404).json({ message: "No donors found for this blood group" });
+        }
+
+        // Extract donor emails
+        const donorEmails = donors.map(donor => donor.email);
+
+        // Send email to all matching donors
+        for (const donorEmail of donorEmails) {
+            await requestEmail(donorEmail, `Urgent Blood Request - ${bloodGroup}`, {
+                fullName, phone, email, bloodGroup, location
+            });
+        }
+
+        res.status(200).json({
+            message: `Blood request sent successfully to ${donors.length} donors`,
+            notifiedDonors: donorEmails
+        });
+    } catch (error) {
+        console.error("Error processing blood request:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+}
+
 // Apply validation only to the POST route
 router.post("/addUser", userLimiter, userValidation, addUser);
 router.get("/allUsers", getAllEntries);
 router.get("/group/:group", getEntryByGroup);
 router.put("/editUser", editUser);
 router.get("/verify/:token",verificationtoken);
+router.post("/request-blood",reqblood);
+
 module.exports = {
     addUser,
     getAllEntries,
     getEntryByGroup,
     editUser,
-    verificationtoken
+    verificationtoken,
+    reqblood,
 };
