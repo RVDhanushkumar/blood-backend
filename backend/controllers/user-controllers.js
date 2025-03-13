@@ -1,5 +1,7 @@
 const express = require("express");
 const axios = require("axios");
+const jwt = require('jsonwebtoken');
+const sendEmail = require('../utils/sendEmail');
 const User = require("../models/user");
 const { userValidation, userSchema } = require("../middleware/userValidation"); 
 const userLimiter = require("../middleware/rateLimiter");
@@ -57,13 +59,14 @@ async function addUser(req, res) {
                 message: "User already exists with this email, use another email",
             });
         }
-
+        
+        const verificationToken = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1h' });
         // Create new user
-        const newUser = await User.create({ fullName, age, gender, bloodgroup, mobile, email, address });
-        return res.status(201).json({
-            success: true,
-            message: `User ${fullName} registered successfully`,
-        });
+        const newUser = await User.create({ fullName, age, gender, bloodgroup, mobile, email, address , isVerified:false, verificationToken:verificationToken });
+        const verificationLink = `http://localhost:5000/api/auth/verify/${verificationToken}`;
+        await sendEmail(email, 'Verify Your Email', `Click here to verify your email: ${verificationLink}`);
+
+        res.status(201).json({ msg: 'Registration successful, check your email for verification link' });
 
     } catch (error) {
         console.error("Server error:", error);
@@ -144,16 +147,32 @@ async function editUser(req, res) {
         });
     }
 }
+async function verificationtoken(req,res) {
+    try {
+        const { token } = req.params;
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
+        const user = await User.findOne({ email: decoded.email });
+        if (!user) return res.status(400).json({ msg: 'Invalid verification link' });
+
+        user.isVerified = true;
+        user.verificationToken = null;
+        await user.save();
+        res.redirect("https://anes-blood-donor.vercel.app");
+    } catch (error) {
+        res.status(500).json({ error: 'Invalid or expired token' });
+    }
+}
 // Apply validation only to the POST route
 router.post("/addUser", userLimiter, userValidation, addUser);
 router.get("/allUsers", getAllEntries);
 router.get("/group/:group", getEntryByGroup);
 router.put("/editUser", editUser);
-
+router.get("/verify/:token",verificationtoken);
 module.exports = {
     addUser,
     getAllEntries,
     getEntryByGroup,
-    editUser
+    editUser,
+    verificationtoken
 };
