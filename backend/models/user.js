@@ -36,6 +36,15 @@ const UserSchema = new Schema({
     default: false,
   },
   verificationToken: String,
+  verificationExpires: {
+    type: Date,
+    default: () => new Date(Date.now() + 5 * 60 * 1000),
+  },
 });
+
+UserSchema.index(
+  { verificationExpires: 1 },
+  { expireAfterSeconds: 0, partialFilterExpression: { isVerified: false } }
+);
 
 module.exports = mongoose.model("User", UserSchema);
