@@ -157,6 +157,7 @@ async function verificationtoken(req,res) {
 
         user.isVerified = true;
         user.verificationToken = null;
+        user.verificationExpires = undefined;
         await user.save();
         res.redirect("https://anes-blood-donor.vercel.app");
     } catch (error) {
