@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
-const sendEmail = async (email, subject, message) => {
+const sendEmail = async (email, subject, verificationLink) => {
     try {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -11,14 +11,31 @@ const sendEmail = async (email, subject, message) => {
             },
         });
 
-        await transporter.sendMail({
-            from: process.env.EMAIL_USER,
+        const mailOptions = {
+            from: `"Blood Connect" <no-reply@bloodconnect.com>`, // Professional sender name
             to: email,
             subject: subject,
-            text: message,
-        });
+            html: `
+                <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+                    <h2 style="color: #d9534f; text-align: center;">Welcome to Blood Connect!</h2>
+                    <p>Dear Donor,</p>
+                    <p>Thank you for registering with <strong>Blood Connect</strong>. Your willingness to donate blood can save lives!</p>
+                    <p>To complete your registration and verify your email, please click the button below:</p>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <a href="${verificationLink}" 
+                           style="background-color: #d9534f; color: white; padding: 12px 20px; text-decoration: none; font-size: 16px; border-radius: 5px;">
+                            Verify Your Email
+                        </a>
+                    </div>
+                    <p>If you did not sign up for Blood Connect, please ignore this email.</p>
+                    <p>Thank you for being a hero!</p>
+                    <p><strong>- The Blood Connect Team</strong></p>
+                </div>
+            `,
+        };
 
-        console.log('Email sent successfully');
+        await transporter.sendMail(mailOptions);
+        console.log('Verification email sent successfully');
     } catch (error) {
         console.error('Error sending email:', error);
     }
