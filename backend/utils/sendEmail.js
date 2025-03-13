@@ -12,7 +12,7 @@ const sendEmail = async (email, subject, verificationLink) => {
         });
 
         const mailOptions = {
-            from: `"Blood Connect" <no-reply@bloodconnect.com>`, // Professional sender name
+            from: `"ANES-Blood Donor" <no-reply@anesblooddonor.com>`,
             to: email,
             subject: subject,
             html: `
