@@ -63,7 +63,7 @@ async function addUser(req, res) {
         const verificationToken = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1h' });
         // Create new user
         const newUser = await User.create({ fullName, age, gender, bloodgroup, mobile, email, address , isVerified:false, verificationToken:verificationToken });
-        const verificationLink = `http://localhost:5000/api/auth/verify/${verificationToken}`;
+        const verificationLink = `https://blood-ey76.onrender.com/user/verify/${verificationToken}`;
         await sendEmail(email, 'Verify Your Email', `Click here to verify your email: ${verificationLink}`);
 
         res.status(201).json({ msg: 'Registration successful, check your email for verification link' });
