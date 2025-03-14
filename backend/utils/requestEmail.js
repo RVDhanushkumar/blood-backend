@@ -12,7 +12,7 @@ const sendBloodRequestEmail = async (email, subject, requesterDetails) => {
         });
 
         const mailOptions = {
-            from: `"ANES-Blood Donor" <no-reply@anesblooddonor.com>`,
+            from: `"ANES-Blood Donor" <support@anesblooddonor.com>`,
             to: email,
             subject: subject,
             html: `
