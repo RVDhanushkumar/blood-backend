@@ -201,7 +201,7 @@ async function reqblood(req, res) {
 
     } catch (error) {
         console.error("Error processing blood request:", error);
-        res.status(500).json({ message: `Server error: ${error} ` });
+        res.status(500).json({ message: `Server error: ${error}` });
     }
 }
 
