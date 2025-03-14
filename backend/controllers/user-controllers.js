@@ -12,9 +12,7 @@ const router = express.Router();
 async function addUser(req, res) {
     let { fullName, age, gender, bloodgroup, mobile, email, address, captcha } = req.body;
     age = parseInt(age);
-    
 
-    // Validate input using Zod schema
     const validationResult = userSchema.safeParse({ fullName, age, gender, bloodgroup, mobile, email, address });
 
     if (!validationResult.success) {
@@ -65,7 +63,8 @@ async function addUser(req, res) {
         // Create new user
         const newUser = await User.create({ fullName, age, gender, bloodgroup, mobile, email, address , isVerified:false, verificationToken:verificationToken });
         const verificationLink = `https://blood-ey76.onrender.com/user/verify/${verificationToken}`;
-        await sendEmail(email, 'Verification of Email for ANES Blood Donor', verificationLink);
+        const name = String(fullName);
+        await sendEmail(name, email, 'Verification of Email for ANES Blood Donor', verificationLink);
 
         res.status(201).json({ msg: 'Registration successful, check your email for verification link' });
 
@@ -183,9 +182,9 @@ async function reqblood(req,res){
 
         const donorEmails = donors.map(donor => donor.email);
         const bloodGroup = String(bloodgroup);
-
+        const name = String(fullName);
         for (const donorEmail of donorEmails) {
-            await requestEmail(donorEmail, `Urgent Blood Request - ${bloodGroup}`, {
+            await requestEmail(name, donorEmail, `Urgent Blood Request - ${bloodGroup}`, {
                 fullName, phone, email, bloodGroup, location
             });
         }
