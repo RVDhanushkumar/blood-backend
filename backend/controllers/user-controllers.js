@@ -182,13 +182,15 @@ async function reqblood(req,res){
         }
 
         const donorEmails = donors.map(donor => donor.email);
+        const bloodGroup = String(req.bloodgroup);
 
         for (const donorEmail of donorEmails) {
-            await requestEmail(donorEmail, `Urgent Blood Request - ${bloodgroup}`, {
-                fullName, phone, email, bloodgroup, location
+            await requestEmail(donorEmail, `Urgent Blood Request - ${bloodGroup}`, {
+                fullName, phone, email, bloodGroup, location
             });
         }
 
+        
         res.status(200).json({
             message: `Blood request sent successfully to ${donors.length} donors`,
             notifiedDonors: donorEmails
