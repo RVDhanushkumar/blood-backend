@@ -166,7 +166,7 @@ async function verificationtoken(req,res) {
     }
 }
 
-async function reqblood(req,res){
+async function reqblood(req, res) {
     try {
         const { fullName, phone, email, bloodgroup, location } = req.body;
 
@@ -181,17 +181,21 @@ async function reqblood(req,res){
         }
 
         const bloodGroup = String(bloodgroup);
-        for (const i of donors) {
-            let email = String(i.email);
-            let name = String(i.fullName);
-            await requestEmail(name,email, `Urgent Blood Request - ${bloodGroup}`, {
-                fullName, phone, email, bloodGroup, location
-            });
+        let donorEmails = [];
+
+        for (const donor of donors) {
+            let donorEmail = String(donor.email);
+            let donorName = String(donor.fullName);
+            donorEmails.push(donorEmail);
+
+            // Sending the request email
+            await requestEmail(donorName, donorEmail, `Urgent Blood Request - ${bloodGroup}`,
+                `Dear ${donorName},\n\nA patient in ${location} urgently needs blood (${bloodGroup}).\n\nDonor Details:\n- Name: ${fullName}\n- Contact: ${phone}\n- Email: ${email}\n\nIf you're able to help, please respond or visit the nearest blood donation center.\n\nThank you for your generosity!\n\n- ANES Blood Donation Team`
+            );
         }
 
-        
         res.status(200).json({
-            message: `Blood ${bloodGroup} request sent successfully to ${name} ${donors.length} donors`,
+            message: `Blood request for ${bloodGroup} sent successfully to ${donors.length} donors.`,
             notifiedDonors: donorEmails
         });
     } catch (error) {
@@ -199,6 +203,7 @@ async function reqblood(req,res){
         res.status(500).json({ message: "Server error" });
     }
 }
+
 
 // Apply validation only to the POST route
 router.post("/addUser", userLimiter, userValidation, addUser);
