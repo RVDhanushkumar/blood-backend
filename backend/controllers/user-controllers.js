@@ -182,7 +182,9 @@ async function reqblood(req,res){
 
         const bloodGroup = String(bloodgroup);
         for (const i of donors) {
-            await requestEmail(i.fullName,i.email, `Urgent Blood Request - ${bloodGroup}`, {
+            const email = String(i.email);
+            const name = String(i.fullName);
+            await requestEmail(name,email, `Urgent Blood Request - ${bloodGroup}`, {
                 fullName, phone, email, bloodGroup, location
             });
         }
