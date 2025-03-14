@@ -169,13 +169,13 @@ async function verificationtoken(req,res) {
 
 async function reqblood(req,res){
     try {
-        const { fullName, phone, email, bloodGroup, location } = req.body;
+        const { fullName, phone, email, bloodgroup, location } = req.body;
 
-        if (!fullName || !phone || !email || !bloodGroup || !location) {
+        if (!fullName || !phone || !email || !bloodgroup || !location) {
             return res.status(400).json({ message: "All fields are required" });
         }
 
-        const donors = await User.find({ bloodgroup:bloodGroup });
+        const donors = await User.find({ bloodGroup });
 
         if (donors.length === 0) {
             return res.status(404).json({ message: "No donors found for this blood group" });
