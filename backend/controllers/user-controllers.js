@@ -184,8 +184,8 @@ async function reqblood(req,res){
         const donorEmails = donors.map(donor => donor.email);
 
         for (const donorEmail of donorEmails) {
-            await requestEmail(donorEmail, `Urgent Blood Request - ${bloodGroup}`, {
-                fullName, phone, email, bloodGroup, location
+            await requestEmail(donorEmail, `Urgent Blood Request - ${bloodgroup}`, {
+                fullName, phone, email, bloodgroup, location
             });
         }
 
