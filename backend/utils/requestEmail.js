@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
-const sendBloodRequestEmail = async (name,email, subject, requesterDetails) => {
+const sendBloodRequestEmail = async (name, email, subject, requesterDetails) => {
     try {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -18,7 +18,7 @@ const sendBloodRequestEmail = async (name,email, subject, requesterDetails) => {
             html: `
                 <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
                     <h2 style="color: #d9534f; text-align: center;">Urgent Blood Request - ${requesterDetails.bloodGroup}</h2>
-                    <p>Dear ${name},</p>
+                    <p>Dear <strong>${name}</strong>,</p>
                     <p>We have received an urgent blood request for <strong>${requesterDetails.bloodGroup}</strong>. Your contribution can save a life!</p>
                     
                     <h3 style="color: #d9534f;">Requester Details:</h3>
@@ -44,9 +44,10 @@ const sendBloodRequestEmail = async (name,email, subject, requesterDetails) => {
         };
 
         await transporter.sendMail(mailOptions);
-        console.log('Blood request email sent successfully');
+        console.log(`✅ Blood request email sent successfully to ${name}`);
+
     } catch (error) {
-        console.error('Error sending email:', error);
+        console.error('❌ Error sending email:', error);
     }
 };
 
