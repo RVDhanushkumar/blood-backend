@@ -170,22 +170,18 @@ async function reqblood(req,res){
     try {
         const { fullName, phone, email, bloodGroup, location } = req.body;
 
-        // Validate input
         if (!fullName || !phone || !email || !bloodGroup || !location) {
             return res.status(400).json({ message: "All fields are required" });
         }
 
-        // Find verified donors with the same blood group
         const donors = await User.find({ bloodGroup, isVerified: true });
 
         if (donors.length === 0) {
             return res.status(404).json({ message: "No donors found for this blood group" });
         }
 
-        // Extract donor emails
         const donorEmails = donors.map(donor => donor.email);
 
-        // Send email to all matching donors
         for (const donorEmail of donorEmails) {
             await requestEmail(donorEmail, `Urgent Blood Request - ${bloodGroup}`, {
                 fullName, phone, email, bloodGroup, location
