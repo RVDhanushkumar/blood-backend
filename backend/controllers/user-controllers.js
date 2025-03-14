@@ -181,27 +181,26 @@ async function reqblood(req, res) {
         }
 
         const bloodGroup = String(bloodgroup);
-        let notifiedDonors = [];
+        let donorEmails = [];
 
         for (const donor of donors) {
             let donorEmail = String(donor.email);
             let donorName = String(donor.fullName);
+            donorEmails.push(donorEmail);
 
-            await sendBloodRequestEmail(donorName, donorEmail, `Urgent Blood Request - ${bloodGroup}`, {
-                fullName, phone, email, bloodGroup, location
-            });
-
-            notifiedDonors.push(donorEmail);
+            // Sending the request email
+            await requestEmail(donorName, donorEmail, `Urgent Blood Request - ${bloodGroup}`,
+                `Dear ${donorName},\n\nA patient in ${location} urgently needs blood (${bloodGroup}).\n\nDonor Details:\n- Name: ${fullName}\n- Contact: ${phone}\n- Email: ${email}\n\nIf you're able to help, please respond or visit the nearest blood donation center.\n\nThank you for your generosity!\n\n- ANES Blood Donation Team`
+            );
         }
 
         res.status(200).json({
             message: `Blood request for ${bloodGroup} sent successfully to ${donors.length} donors.`,
-            notifiedDonors
+            notifiedDonors: donorEmails
         });
-
     } catch (error) {
         console.error("Error processing blood request:", error);
-        res.status(500).json({ message: "Server error " });
+        res.status(500).json({ message: "Server error" });
     }
 }
 
