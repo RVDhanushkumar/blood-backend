@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
-const sendBloodRequestEmail = async (name,email, subject, requesterDetails) => {
+const sendBloodRequestEmail = async (email, subject, requesterDetails) => {
     try {
         const transporter = nodemailer.createTransport({
             service: 'gmail',

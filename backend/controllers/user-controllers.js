@@ -180,11 +180,12 @@ async function reqblood(req,res){
             return res.status(404).json({ message: "No donors found for this blood group" });
         }
 
+        const donorEmails = donors.map(donor => donor.email);
+
         const bloodGroup = String(bloodgroup);
-        for (const i of donors) {
-            let email = String(i.email);
-            let name = String(i.fullName);
-            await requestEmail(name,email, `Urgent Blood Request - ${bloodGroup}`, {
+        const name = String(donors.fullName);
+        for (const donorEmail of donorEmails) {
+            await requestEmail(name, donorEmail, `Urgent Blood Request - ${bloodGroup}`, {
                 fullName, phone, email, bloodGroup, location
             });
         }
