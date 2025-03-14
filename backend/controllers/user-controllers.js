@@ -175,7 +175,7 @@ async function reqblood(req,res){
             return res.status(400).json({ message: "All fields are required" });
         }
 
-        const donors = await User.find({ bloodGroup });
+        const donors = await User.find({ bloodgroup });
 
         if (donors.length === 0) {
             return res.status(404).json({ message: "No donors found for this blood group" });
