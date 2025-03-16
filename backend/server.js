@@ -17,12 +17,13 @@ app.use(express.json());
 
 // DB connection
 const dbConnection = require('./database/db');
-dbConnection(); // Connect to the database
+dbConnection(); 
 
-// User routes
 const userRoutes = require('./routes/user-routes');
 app.use("/user", userRoutes);
-
+app.get("/",(req,res)=>{
+  res.send("Its just blood backend");
+})
 // Setting up the server port
 const port = process.env.PORT || 3000;
 
