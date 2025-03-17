@@ -159,7 +159,7 @@ async function verificationtoken(req,res) {
         user.verificationToken = null;
         user.verificationExpires = undefined;
         await user.save();
-        res.redirect("https://anes-blood-donor.vercel.app");
+        res.redirect("https://anes-blood-donor.vercel.app/getallData");
     } catch (error) {
         res.status(500).json({ error: 'Invalid or expired token' });
     }
@@ -190,7 +190,7 @@ async function reqblood(req,res){
 
         
         res.status(200).json({
-            message: `Blood ${bloodGroup} request sent successfully to ${donors.length} donors`,
+            message: `Blood ${bloodGroup} request sent successfully to ${name} ${donors.length} donors`,
             notifiedDonors: donorEmails
         });
     } catch (error) {
