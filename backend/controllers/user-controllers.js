@@ -190,7 +190,7 @@ async function reqblood(req,res){
 
         
         res.status(200).json({
-            message: `Blood ${bloodGroup} request sent successfully to ${name} ${donors.length} donors`,
+            message: `Blood ${bloodGroup} request sent successfully to ${donors.length} donors`,
             notifiedDonors: donorEmails
         });
     } catch (error) {
