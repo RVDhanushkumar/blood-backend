@@ -156,7 +156,6 @@ async function reqblood(req, res) {
     }
 }
 
-// Apply validation only to the POST route
 router.post("/addUser", userLimiter, userValidation, addUser);
 router.get("/allUsers", getAllEntries);
 router.get("/group/:group", getEntryByGroup);
