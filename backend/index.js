@@ -1,32 +1,43 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const helmet = require("helmet");
+const morgan = require("morgan");
+
 const app = express();
 
-// CORS Configuration: Allow all origins
+
 const corsOptions = {
-  origin: "*", // Allow all origins
-  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
-  allowedHeaders: ["Content-Type", "Authorization", "x-access-token"], // Allowed headers
+  origin: process.env.ALLOWED_ORIGINS || "*", 
+  methods: ["GET", "POST", "PUT", "DELETE"], 
+  allowedHeaders: ["Content-Type", "Authorization", "x-access-token"], 
 };
 
 app.use(cors(corsOptions));
-
-// Your other middleware
+app.use(helmet());
+app.use(morgan("dev")); 
 app.use(express.json()); 
 
-// DB connection
-const dbConnection = require('./database/db');
-dbConnection(); 
+const dbConnection = require("./database/db");
+dbConnection();
 
-const userRoutes = require('./routes/user-routes');
+const userRoutes = require("./routes/user-routes");
 app.use("/user", userRoutes);
-app.get("/",(req,res)=>{
-  res.send("Its just blood backend");
-})
-// Setting up the server port
-const port = process.env.PORT || 3000;
 
+app.get("/", (req, res) => {
+  res.send("It's just blood backend");
+});
+
+app.use((req, res, next) => {
+  res.status(404).json({ error: "Route not found" });
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: "Internal Server Error" });
+});
+
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
