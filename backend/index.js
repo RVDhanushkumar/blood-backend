@@ -25,7 +25,7 @@ const userRoutes = require("./routes/user-routes");
 app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {
-  res.send("It's just blood backend");
+  res.send("It's just blood backend happy coding :)");
 });
 
 app.use((req, res, next) => {
