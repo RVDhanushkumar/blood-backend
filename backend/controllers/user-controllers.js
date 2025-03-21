@@ -130,7 +130,30 @@ async function verificationtoken(req, res) {
         res.status(500).json({ success: false, message: "Invalid or expired token" });
     }
 }
+async function reqblood(req, res) {
+    try {
+        const { fullName, phone, email, bloodgroup, location } = req.body;
 
+        if (!fullName || !phone || !email || !bloodgroup || !location) {
+            return res.status(400).json({ success: false, message: "All fields are required" });
+        }
+
+        const donors = await User.find({ bloodgroup });
+        if (!donors.length) {
+            return res.status(404).json({ success: false, message: "No donors found for this blood group" });
+        }
+
+        const donorEmails = donors.map(donor => donor.email);
+        for (const donorEmail of donorEmails) {
+            await requestEmail(donorEmail, `Urgent Blood Request - ${bloodgroup}`, { fullName, phone, email, bloodgroup, location });
+        }
+
+        res.status(200).json({ success: true, message: `Blood ${bloodgroup} request sent successfully to ${donors.length} donors`, notifiedDonors: donorEmails });
+    } catch (error) {
+        console.error("Error processing blood request:", error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
+}
 async function reqblood(req, res) {
     try {
         const { fullName, phone, email, bloodgroup, location } = req.body;
